@@ -21,14 +21,15 @@ class Contact(BaseModel):
     phone_number:str
 
 
-def get_dict(contact:Contact):
-    return {"id":contact.id,"first name":contact.first_name,"last name":contact.last_name,"phone number":contact.phone_number}
+    def get_dict(self):
+        return {"id":self.id,"first name":self.first_name,"last name":self.last_name,"phone number":self.phone_number}
 
 def create_contact(contact:Contact):
+    contact = Contact.get_dict(contact)
     with connection.cursor() as cursor:
         cursor.execute("INSERT INTO contacts (first_name, last_name, phone_number) VALUES (%s,%s,%s);",
-                       [contact.first_name,contact.last_name,contact.phone_number])
-        cursor.execute("SELECT id FROM contacts WHERE phone_number = %s ",[contact.phone_number])
+                       [contact["first name"],contact["last name"],contact["phone number"]])
+        cursor.execute("SELECT id FROM contacts WHERE phone_number = %s ",[contact["phone number"]])
         result =  cursor.fetchall()[0][0]
         connection.commit()
         return result
@@ -40,7 +41,7 @@ def get_all_contacts():
         all_contacts = cursor.fetchall()
         result = []
         for my_object in all_contacts:
-            result.append(Contact(id=my_object[0],first_name=my_object[1],last_name=my_object[2],phone_number=my_object[3]))
+            result.append(Contact.get_dict(Contact(id=my_object[0],first_name=my_object[1],last_name=my_object[2],phone_number=my_object[3])))
         return result
 
 def update_contact(my_id,change_place,new_value):
@@ -58,7 +59,7 @@ def delete_contact(my_id):
 
 
 # a = Contact(first_name="hhh",last_name="bbb",phone_number="6660")
-# create_contact(a)
+# print(create_contact(a))
 # print(get_all_contacts())
 # print(update_contact(3,'phone_number' ,"6670" ))
 # print(delete_contact(3))
