@@ -37,8 +37,10 @@ def get_all_contacts():
     with connection.cursor() as cursor:
         cursor.execute(f"SELECT * FROM contacts")
         all_contacts = cursor.fetchall()
+        result = []
         for my_object in all_contacts:
-            print(Contact(id=my_object[0],first_name=my_object[1],last_name=my_object[2],phone_number=my_object[3]))
+            result.append(Contact(id=my_object[0],first_name=my_object[1],last_name=my_object[2],phone_number=my_object[3]))
+        return result
 
 def update_contact(my_id,change_place,new_value):
     with connection.cursor() as cursor:
@@ -56,7 +58,7 @@ def delete_contact(my_id):
 
 # a = Contact(first_name="hhh",last_name="bbb",phone_number="6660")
 # create_contact(a)
-# get_all_contacts()
+# print(get_all_contacts())
 # print(update_contact(3,'phone_number' ,"6670" ))
 # print(delete_contact(3))
 connection.close()
