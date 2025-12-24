@@ -29,8 +29,9 @@ def create_contact(contact:Contact):
         cursor.execute("INSERT INTO contacts (first_name, last_name, phone_number) VALUES (%s,%s,%s);",
                        [contact.first_name,contact.last_name,contact.phone_number])
         cursor.execute("SELECT id FROM contacts WHERE phone_number = %s ",[contact.phone_number])
-        print(cursor.fetchall()[0][0])
+        result =  cursor.fetchall()[0][0]
         connection.commit()
+        return result
 
 
 def get_all_contacts():
@@ -61,4 +62,4 @@ def delete_contact(my_id):
 # print(get_all_contacts())
 # print(update_contact(3,'phone_number' ,"6670" ))
 # print(delete_contact(3))
-connection.close()
+# connection.close()
