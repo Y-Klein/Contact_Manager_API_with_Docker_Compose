@@ -26,5 +26,4 @@ ENV/
 htmlcov/
 
 # Environment
-.env
 .env.local
