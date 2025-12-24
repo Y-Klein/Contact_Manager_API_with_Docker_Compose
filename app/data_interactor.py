@@ -4,8 +4,8 @@ from  dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Optional
 
-
 load_dotenv()
+
 connection =  mysql.connector.connect(
     user = os.getenv("DB_USER"),
     password = os.getenv("DB_PASSWORD"),

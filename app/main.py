@@ -1,11 +1,11 @@
 from fastapi import FastAPI
-from app.data_interactor import *
+from data_interactor import *
 
 app = FastAPI()
 
 
 @app.get("/contacts")
-def ger_all():
+def get_all():
     return get_all_contacts()
 
 @app.post("/contacts")
