@@ -1,5 +1,3 @@
-from http.client import HTTPException
-
 from fastapi import FastAPI
 from data_interactor import *
 
