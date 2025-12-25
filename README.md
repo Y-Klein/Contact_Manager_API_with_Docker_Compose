@@ -32,3 +32,25 @@ docker compose up --buld -d
 
 - Example curl commands to check each endpoint
 
+curl -X 'GET' \
+  'http://localhost:8000/contacts' \
+  -H 'accept: application/json'
+
+
+  curl -X 'POST' \
+  'http://localhost:8000/contacts' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "first_name": "string",
+  "last_name": "string",
+  "phone_number": "string"
+}'
+
+curl -X 'PUT' \
+  'http://localhost:8000/contacts/{id}?my_id=5&change_place=phone_number&new_value=%220000%22' \
+  -H 'accept: application/json'
+
+  curl -X 'DELETE' \
+  'http://localhost:8000/contacts/{id}?my_id=5' \
+  -H 'accept: application/json'
